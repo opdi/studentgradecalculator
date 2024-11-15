@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('img/image calculator.jpg'); /* Corrected path */
+            background-size: cover;
+            background-position: center;
+        }
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <h2>Student Grade Calculator</h2>
+    <div id="subjects">
+        <input type="number" placeholder="Subject 1 marks" id="mark1" min="0" max="100">
+        <input type="number" placeholder="Subject 2 marks" id="mark2" min="0" max="100">
+        <input type="number" placeholder="Subject 3 marks" id="mark3" min="0" max="100">
+        <input type="number" placeholder="Subject 4 marks" id="mark4" min="0" max="100">
+        <input type="number" placeholder="Subject 5 marks" id="mark5" min="0" max="100">
+    </div>
+    <button onclick="calculateGrade()">Calculate Grade</button>
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+function calculateGrade() {
+    const marks = [];
+    for (let i = 1; i <= 5; i++) {
+        const mark = parseFloat(document.getElementById(`mark${i}`).value) || 0;
+        marks.push(mark);
+    }
+
+    const sum = marks.reduce((acc, mark) => acc + mark, 0);
+    const avg = sum / marks.length;
+    
+    let grade;
+    if (avg >= 90) grade = 'A';
+    else if (avg >= 80) grade = 'B';
+    else if (avg >= 70) grade = 'C';
+    else if (avg >= 60) grade = 'D';
+    else grade = 'F';
+
+    document.getElementById("result").innerHTML = `Average: ${avg.toFixed(2)}<br>Grade: ${grade}`;
+}
+</script>
+
+</body>
+</html>
